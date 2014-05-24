@@ -47,8 +47,8 @@ app.get('/events.json', handler);
 
 ```javascript
 // Using Groove.js
-var eventsByType = function(req, res) { res.json(find(req.params['type'])) },
-    all          = function(req, res) { res.json(find()); },
+var all            = function(req, res) { res.json(find()); },
+    eventsByType   = function(req, res) { res.json(find(req.params['type'])) },
     upcomingByCity = function(req, res) {
       res.json(findByCity(req.params['cityId'], 'upcoming'));
     };
