@@ -31,7 +31,7 @@ var handler = function(req, res) {
 
   if (req.query['type'] === 'upcoming') {
     if (req.query['cityId']) {
-      res.json(findByCity(req.query['cityID'], 'upcoming'));
+      res.json(findByCity(req.query['cityId'], 'upcoming'));
     } else {
       res.json(find('upcoming'));
     }
