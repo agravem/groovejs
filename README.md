@@ -31,7 +31,7 @@ var handler = function(req, res) {
 
   if (req.query['type'] === 'upcoming') {
     if (req.query['cityId']) {
-      res.json(findByCity(req.query['cityID'], 'upcoming'));
+      res.json(findByCity(req.query['cityId'], 'upcoming'));
     } else {
       res.json(find('upcoming'));
     }
@@ -47,11 +47,9 @@ app.get('/events.json', handler);
 
 ```javascript
 // Using Groove.js
-var eventsByType = function(req, res) { res.json(find(req.params['type'])) },
-    all          = function(req, res) { res.json(find()); },
-    upcomingByCity = function(req, res) {
-      res.json(findByCity(req.params['cityId'], 'upcoming'));
-    };
+var all            = function(req, res) { res.json(find()); },
+    eventsByType   = function(req, res) { res.json(find(req.query['type'])); },
+    upcomingByCity = function(req, res) { res.json(findByCity(req.query['cityId'], 'upcoming')); };
 
 // setup connect app ...
 app.use(groove.route({
