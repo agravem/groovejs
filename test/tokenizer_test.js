@@ -19,11 +19,21 @@ test('POST /ponies/:id.json', function(){
 
 test('GET /ponies.json?kind=earth&mane=:mane', function(){
   var tokenizer = new Tokenizer('GET /ponies.json?kind=earth&mane=:mane');
-  var tokens    = { verb: 'GET', 
-                    path: ['/ponies.json'], 
-                    query: { 
+  var tokens    = { verb: 'GET',
+                    path: ['/ponies.json'],
+                    query: {
                       kind: 'earth',
                       mane: ':mane' }};
 
   expect(tokenizer.tokens()).to.deep.equal(tokens);
+});
+
+test('commas are valid characters in querystring values', function() {
+  var tokenizer = new Tokenizer('GET /:id.json?kinds=earth,pegasus');
+  var tokens    = { verb: 'GET',
+                   path: ['/:id.json'],
+                   query: {
+                      kinds: 'earth,pegasus' }};
+
+  expect(tokenizer.tokens()).to.deep.equals(tokens);
 });
